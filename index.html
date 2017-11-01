@@ -1,0 +1,44 @@
+<html ng-app="app">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.min.js"></script>
+    <script src="/app.js"></script>
+    <style>
+      .fullwidth{ width: 1200px;  margin: auto; background: #eef; }
+      .small, label{ font-size: 12px; color: #ccc; }
+      a.small{ color: #777; }
+      img{ max-width: 100%; }
+      .page{ padding: 5px; border: 1px solid grey; }
+    </style>
+  </head>
+  <body>
+    <div class="fullwidth">
+      <div class="nav"><a href="#">Home</a>|<a href="#about">About</a></div>
+      <!-- Grabs Home Page thru JSS call -->
+      <div ng-controller="HomeCtrl as homeCtrl" class="page">
+        <ul class="small">
+          <li> - Debug - </li>
+          <li>PageEditing:<span ng-bind="homeCtrl.model.context.pageEditing"></span></li>
+          <li>Domain:<span ng-bind="homeCtrl.model.context.user.domain"></span></li>
+          <li>User:<span ng-bind="homeCtrl.model.context.user.name"></span></li>
+        </ul>
+        <div ng-repeat="(key, field) in homeCtrl.model.fields track by $index">
+          <label ng-bind="key" for="field_{{$index}}"></label>
+          <a class="small" name="field_{{$index}}" ng-hide="!homeCtrl.model.context.pageEditing" ng-click="field.editing = !field.editing">Edit/Show</a>
+          <span ng-bind-html="field.value" ng-hide="!!field.editing"></span>
+          <span ng-bind="field.editable" ng-hide="!field.editing"></span>
+        </div>
+      </div>
+      <!-- Grabs About Us page thru JSS call -->
+      <div ng-controller="AboutCtrl as aboutCtrl" class="page">
+        <div ng-repeat="(key, field) in aboutCtrl.model.fields track by $index">
+          <label ng-bind="key" for="field_{{$index}}"></label>
+          <a class="small" name="field_{{$index}}" ng-hide="!aboutCtrl.model.context.pageEditing" ng-click="field.editing = !field.editing">Edit/Show</a>
+          <img ng-if="key == 'Hero'" ng-src="{{field.value.src}}" ng-hide="!!field.editing"></img>
+          <span ng-if="key != 'Hero'" ng-bind-html="field.value" ng-hide="!!field.editing"></span>
+          <span ng-if="key != 'Hero'" ng-bind="field.editable" ng-hide="!field.editing"></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
