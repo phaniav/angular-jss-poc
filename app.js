@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var app = angular.module("app", ['ngSanitize', 'ngRoute']); //startup
+  var app = angular.module("app", ['ngSanitize']); //startup
 
   //Home Controller
   function HomeCtrl($scope, $log, $http)

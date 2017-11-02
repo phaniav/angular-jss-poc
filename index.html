@@ -21,6 +21,7 @@
           <li>PageEditing:<span ng-bind="homeCtrl.model.context.pageEditing"></span></li>
           <li>Domain:<span ng-bind="homeCtrl.model.context.user.domain"></span></li>
           <li>User:<span ng-bind="homeCtrl.model.context.user.name"></span></li>
+          <li>Browser:<span ng-bind="homeCtrl.model.context.sessionInfo.deviceInfo.browser"></span></li>
         </ul>
         <div ng-repeat="(key, field) in homeCtrl.model.fields track by $index">
           <label ng-bind="key" for="field_{{$index}}"></label>
